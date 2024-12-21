@@ -10,7 +10,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <Navbar bg="dark" style={{"color":"gold"}}>
+    <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
             <Navbar.Brand href="/" style={{"color":'gold'}}>
                 <FontAwesomeIcon icon={faVideoSlash}/>Gold
