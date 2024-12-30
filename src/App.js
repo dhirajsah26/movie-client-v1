@@ -35,9 +35,11 @@ function App() {
 
   const getMovieData = async (movieId) =>{
     try{
-      
-      const response = await api.get(`/api/v1/movies/${movieId}`);
+      console.log('--------------')
+      const response = await api.get(`/api/v1/movies/imdbId/${movieId}`);
+      console.log(movieId)
       const singleMovie = response.data;
+      console.log('..............',singleMovie)
 
       setMovie(singleMovie);
       
@@ -62,8 +64,9 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route path='/' element= {<Home movies={movies}/>}></Route>
           <Route path='/Trailer/:ytTrailerId' element={<Trailer/>}></Route>
+        
           <Route path="/Reviews/:movieId" element={<Reviews getMovieData = {getMovieData} movie= {movie} reviews={reviews} setReviews = {setReviews}/>}/>
-          {/* <Route path="*" element = {<NotFound/>}></Route> */}
+          
         </Route>
       </Routes>
     </div>
