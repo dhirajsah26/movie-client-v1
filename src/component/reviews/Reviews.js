@@ -1,26 +1,22 @@
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from 'react';
 import api from '../../api/axiosConfig';
-import { useParams } from "react-router-dom";
-import { Container,Row, Col } from "react-bootstrap";
-import ReviewForm from "../reviewForm/ReviewForm";
-
+import {useParams} from 'react-router-dom';
+import {Container, Row, Col} from 'react-bootstrap';
+import ReviewForm from '../reviewForm/ReviewForm';
 
 import React from 'react'
 
+const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
 
-
-
-const Reviews = ({getMovieData, movie, reviews ,setReviews}) => {
-    const revText =useRef();
+    const revText = useRef();
     let params = useParams();
     const movieId = params.movieId;
 
     useEffect(()=>{
-        console.log("------------");
         getMovieData(movieId);
     },[])
 
-    const addReview = async (e) => {
+    const addReview = async (e) =>{
         e.preventDefault();
 
         const rev = revText.current;
@@ -29,33 +25,32 @@ const Reviews = ({getMovieData, movie, reviews ,setReviews}) => {
         {
             const response = await api.post("/api/v1/reviews",{reviewBody:rev.value,imdbId:movieId});
 
-            const updateReviews = [...reviews,{body:rev.value}];
-
+            const updatedReviews = [...reviews, {body:rev.value}];
+    
             rev.value = "";
-            
-            setReviews(updateReviews);
+    
+            setReviews(updatedReviews);
         }
         catch(err)
         {
-            console.log(err);
+            console.error(err);
         }
+        
+
+
+
     }
 
-
-    return (
-    
+  return (
     <Container>
         <Row>
-            <Col><h3>Reviews</h3>
-            </Col>
+            <Col><h3>Reviews</h3></Col>
         </Row>
-
         <Row className="mt-2">
-            <col>
-                <img src={movie?.poster} alt=""/>
-
-            </col>
-            <col>
+            <Col>
+                <img src={movie?.poster} alt="" />
+            </Col>
+            <Col>
                 {
                     <>
                         <Row>
@@ -65,13 +60,13 @@ const Reviews = ({getMovieData, movie, reviews ,setReviews}) => {
                         </Row>
                         <Row>
                             <Col>
-                                <hr/>
+                                <hr />
                             </Col>
                         </Row>
                     </>
                 }
                 {
-                    reviews?.map((r)=> {
+                    reviews?.map((r) => {
                         return(
                             <>
                                 <Row>
@@ -79,22 +74,20 @@ const Reviews = ({getMovieData, movie, reviews ,setReviews}) => {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <hr/>
+                                        <hr />
                                     </Col>
-                                </Row>
+                                </Row>                                
                             </>
                         )
                     })
                 }
-
-            </col>
+            </Col>
         </Row>
         <Row>
             <Col>
-                <hr/>
-
+                <hr />
             </Col>
-        </Row>
+        </Row>        
     </Container>
   )
 }

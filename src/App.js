@@ -39,10 +39,10 @@ function App() {
       const response = await api.get(`/api/v1/movies/imdbId/${movieId}`);
       console.log(movieId)
       const singleMovie = response.data;
-      console.log('..............',singleMovie)
+      
 
       setMovie(singleMovie);
-      
+      console.log(singleMovie.reviews);
       setReviews(singleMovie.reviews);
 
 
@@ -64,8 +64,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route path='/' element= {<Home movies={movies}/>}></Route>
           <Route path='/Trailer/:ytTrailerId' element={<Trailer/>}></Route>
-        
-          <Route path="/Reviews/:movieId" element={<Reviews getMovieData = {getMovieData} movie= {movie} reviews={reviews} setReviews = {setReviews}/>}/>
+          <Route path="/Reviews/:movieId" element ={<Reviews getMovieData = {getMovieData} movie={movie} reviews ={reviews} setReviews = {setReviews} />}></Route>
           
         </Route>
       </Routes>

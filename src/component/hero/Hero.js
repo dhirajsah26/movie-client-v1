@@ -14,6 +14,7 @@ const Hero = ({movies}) => {
     const navigate = useNavigate();
 
     function reviews(movieId){
+        console.log(movieId);
         navigate(`/Reviews/${movieId}`);
     }
   return (
